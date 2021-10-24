@@ -32,6 +32,10 @@ target_include_directories(hello PUBLIC
   ${CMAKE_SOURCE_DIR}/api
 )
 
+#----------------------------------------------------------------------
+# Testing
+#----------------------------------------------------------------------
+
 if(HELLO_COVERAGE)
   message(STATUS ">>> test coverage: YES")
   target_compile_options(hello PUBLIC -coverage -fprofile-arcs -ftest-coverage)
@@ -65,6 +69,27 @@ endmacro()
 
 hello_add_test(hello)
 
+if(HELLO_COVERAGE)
+  # first run `make test` or `ctest`, ensure .gcdata generated
+  # then run `make test_coverage` to get statistics
+  # if `make test_coverage` failed, most likely no `make test` executed yet.
+  add_custom_target(test_coverage
+    COMMAND lcov -d ./ -c -o lcov.info
+    COMMAND lcov -r lcov.info '/usr/*' -o lcov.info
+    COMMAND lcov -r lcov.info '*/build/*' -o lcov.info
+    COMMAND lcov -r lcov.info '*/test/test_*' -o lcov.info
+    COMMAND lcov --list lcov.info
+    COMMAND genhtml -o coverage_report lcov.info
+    COMMAND ${CMAKE_COMMAND} -E cmake_echo_color --cyan "View test coverage html report:"
+    COMMAND ${CMAKE_COMMAND} -E cmake_echo_color --cyan "    cd coverage_report"
+    COMMAND ${CMAKE_COMMAND} -E cmake_echo_color --cyan "    python -m http.server 7082"
+    WORKING_DIRECTORY ${CMAKE_BINARY_DIR}
+  )
+endif()
+
+#----------------------------------------------------------------------
+# Installing
+#----------------------------------------------------------------------
 install(TARGETS hello
   ARCHIVE DESTINATION lib
   PUBLIC_HEADER DESTINATION include/hello
