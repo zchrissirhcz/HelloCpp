@@ -1,4 +1,4 @@
-name: develop
+name: linux-x64
 on: [push, pull_request]
 
 env:
@@ -10,7 +10,7 @@ jobs:
     runs-on: ${{ matrix.image }}
     strategy:
       matrix:
-        image: [ 'windows-latest', 'ubuntu-latest', 'macos-latest']
+        image: [ 'ubuntu-latest' ]
 
     steps:
     - name: cancel-previous-runs
