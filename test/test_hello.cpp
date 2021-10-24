@@ -28,6 +28,14 @@ TEST(hello, common)
     EXPECT_EQ(expected, res);
 }
 
+TEST(split_string, case1)
+{
+    std::string input = "I love programming";
+    std::vector<std::string> expected = {"I", "love", "programming"};
+    std::vector<std::string> res = split_string(input);
+    EXPECT_EQ(expected, res);
+}
+
 int main(int argc, char* argv[])
 {
     testing::InitGoogleTest(&argc, argv);
