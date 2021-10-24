@@ -10,7 +10,7 @@ jobs:
     runs-on: ${{ matrix.image }}
     strategy:
       matrix:
-        image: [ 'windows-latest', 'ubuntu-latest', 'macos-latest']
+        image: [ 'macos-latest' ]
 
     steps:
     - name: cancel-previous-runs
