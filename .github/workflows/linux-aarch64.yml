@@ -1,4 +1,4 @@
-name: linux-aarch64-cpu-gcc
+name: linux-aarch64
 on: [push, pull_request]
 
 jobs:
