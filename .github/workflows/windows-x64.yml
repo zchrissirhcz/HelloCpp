@@ -1,4 +1,4 @@
-name: win-x64
+name: windows-x64
 on: [push, pull_request]
 
 env:
