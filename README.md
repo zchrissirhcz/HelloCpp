@@ -16,26 +16,31 @@
 
 ## Features
 This is an example C++ project with features:
-- [x] integration with unittest
-    - [x] use googletest for C++ unittest
-    - [x] integrate googletest with CMake
-- [x] integration with CMake
-    - [x] create (static) library and executable targets
-    - [x] providing `helloConfig.cmake` for further `find_package(hello)`
-    - [x] `helloConfig.cmake` with portable prefix instead of hard-coded
-    - [x] providing example project demonstrate how `find_package(hello)` usage
-    - [ ] `helloConfig.cmake` handle release/debug modes separately
-- [x] integration with Github Action as CI/CD system
-    - develop state:
-        - [x] build and test after each commit pushed
-        - [x] provide artifactory download after each build
-    - release stage:
-        - [x] automatically upload and publish and release
-- [ ] cross-platform building and testing
+
+- [x] Building
+    - [x] Linux-aarch64 (with QEMU)
     - [x] Linux x64
     - [x] MacOSX x64
     - [x] Windows x64
     - [ ] Android ARMv8
-    - [x] Linux-aarch64 (with QEMU)
 
+- [x] Testing
+    - [x] Use GoogleTest for C++ unittest
+    - [x] Integrate GoogleTest with CMake
+    - [x] GCC compiler test coverage report
+    - [x] CodeCov integration
+    - [ ] Clang compiler test coverage report
 
+- [x] Installing
+    - [x] Create (static) library and executable targets
+    - [x] Providing `helloConfig.cmake` for further `find_package(hello)`
+    - [x] Installed `helloConfig.cmake` with portable prefix instead of hard-coded
+    - [x] Example project demonstrate how `find_package(hello)` use
+    - [ ] `helloConfig.cmake` handle release/debug modes separately
+
+- [x] CI / CD
+    - [x] Github Action
+        - [x] build and test after each commit pushed
+        - [x] provide artifactory download after each build
+        - [x] automatically upload and publish and release
+    - [x] TravisCI arm64 build
