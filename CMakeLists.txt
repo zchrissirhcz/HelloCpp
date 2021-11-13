@@ -42,6 +42,12 @@ if(HELLO_COVERAGE)
   target_link_libraries(hello PUBLIC -coverage -lgcov)
 endif()
 
+if(CMAKE_CXX_COMPILER_ID MATCHES "GNU")
+  set(GCOV_TOOL gcov)
+elseif(CMAKE_CXX_COMPILER_ID MATCHES "Clang")
+  set(GCOV_TOOL ${CMAKE_SOURCE_DIR}/scripts/gcov_for_clang.sh)
+endif()
+
 enable_testing()
 
 #---------------------------------------------------------------
@@ -73,12 +79,13 @@ if(HELLO_COVERAGE)
   # first run `make test` or `ctest`, ensure .gcdata generated
   # then run `make test_coverage` to get statistics
   # if `make test_coverage` failed, most likely no `make test` executed yet.
-  add_custom_target(test_coverage
-    COMMAND lcov -d ./ -c -o lcov.info
-    COMMAND lcov -r lcov.info '/usr/*' -o lcov.info
-    COMMAND lcov -r lcov.info '*/build/*' -o lcov.info
-    COMMAND lcov -r lcov.info '*/test/test_*' -o lcov.info
-    COMMAND lcov --list lcov.info
+  add_custom_target(coverage
+    COMMAND ctest --output-on-failure
+    COMMAND lcov -d ./ -c -o lcov.info --gcov-tool ${GCOV_TOOL}
+    COMMAND lcov -r lcov.info '/usr/*' -o lcov.info --gcov-tool ${GCOV_TOOL}
+    COMMAND lcov -r lcov.info '*/build/*' -o lcov.info --gcov-tool ${GCOV_TOOL}
+    COMMAND lcov -r lcov.info '*/test/test_*' -o lcov.info --gcov-tool ${GCOV_TOOL}
+    COMMAND lcov --list lcov.info --gcov-tool ${GCOV_TOOL}
     COMMAND genhtml -o coverage_report lcov.info
     COMMAND ${CMAKE_COMMAND} -E cmake_echo_color --cyan "View test coverage html report:"
     COMMAND ${CMAKE_COMMAND} -E cmake_echo_color --cyan "    cd coverage_report"
