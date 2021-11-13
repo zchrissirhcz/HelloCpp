@@ -34,7 +34,7 @@ This is an example C++ project with features:
     - [x] Integrate GoogleTest with CMake
     - [x] GCC compiler test coverage report
     - [x] CodeCov integration
-    - [ ] Clang compiler test coverage report
+    - [x] Clang compiler test coverage report
 
 - [x] Installing
     - [x] Create (static) library and executable targets
@@ -54,3 +54,22 @@ This is an example C++ project with features:
     - [x] Example cmake-based project with `find_package()`
 
 If your target feature is not listed above, you may create a issue for that.
+
+## Local usage
+```
+git clone https://github.com/zchrissirhcz/HelloCpp
+cd HelloCpp
+
+mkdir build && cd build
+cmake ..
+cmake --build .
+
+make test
+make coverage
+
+cd coverage_report
+python -m http.server 7082
+```
+![](snapshots/coverage1.png)
+
+![](snapshots/coverage2.png)
