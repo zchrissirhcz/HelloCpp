@@ -52,7 +52,7 @@ jobs:
       run: cpack --config ${{github.workspace}}/build/CPackConfig.cmake -B ${{github.workspace}}/build
 
     - name: Create Release
-      uses: ncipollo/release-action@v1.8.10
+      uses: ncipollo/release-action@v1.9.0
       with:
         artifacts: ${{github.workspace}}/build/HelloCpp-Linux-x64.zip
         token: ${{ secrets.GITHUB_TOKEN }}
