@@ -37,7 +37,8 @@ This is an example C++ project with features:
     - [x] Clang compiler test coverage report
 
 - [x] Installing
-    - [x] Create (static) library and executable targets
+    - [x] Create static library and executable targets
+    - [ ] Create shared library for Linux, Android and Windows platforms
     - [x] Providing `helloConfig.cmake` for further `find_package(hello)`
     - [x] Installed `helloConfig.cmake` with portable prefix instead of hard-coded
     - [x] Example project demonstrate how `find_package(hello)` use
