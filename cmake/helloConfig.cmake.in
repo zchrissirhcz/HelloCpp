@@ -1,2 +1,11 @@
+# the classical vars
 set(hello_INCLUDE_DIR "${CMAKE_CURRENT_LIST_DIR}/include")
 set(hello_LIB "${CMAKE_CURRENT_LIST_DIR}/lib/libhello.a")
+
+# the modern CMake style, imported library
+# TODO: may setup release and debug libraries separately
+add_library(hello::LIB STATIC IMPORTED)
+set_target_properties(hello::LIB PROPERTIES
+    INTERFACE_INCLUDE_DIRECTORIES "${hello_INCLUDE_DIR}"
+    IMPORTED_LOCATION "${hello_LIB}"
+)

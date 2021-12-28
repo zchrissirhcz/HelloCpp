@@ -9,10 +9,15 @@ set(hello_DIR "/home/zz/work/HelloCpp/build/install")
 find_package(hello REQUIRED)
 
 add_executable(use_hello use_hello.cpp)
-target_include_directories(use_hello PRIVATE
-  ${hello_INCLUDE_DIR}
-)
-target_link_libraries(use_hello PRIVATE
-  ${hello_LIB}
-)
+
+if(1)
+  target_link_libraries(use_hello PUBLIC hello::LIB)
+else()
+  target_include_directories(use_hello PRIVATE
+    ${hello_INCLUDE_DIR}
+  )
+  target_link_libraries(use_hello PRIVATE
+    ${hello_LIB}
+  )
+endif()
 
