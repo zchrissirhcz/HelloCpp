@@ -25,6 +25,7 @@ find_package(GTest REQUIRED)
 add_library(hello STATIC
   api/hello/hello.hpp
   src/hello.cpp
+  src/cv.cpp
 )
 set_target_properties(hello PROPERTIES
   PUBLIC_HEADER "api/hello/hello.hpp"
