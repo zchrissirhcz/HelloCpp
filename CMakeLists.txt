@@ -13,6 +13,7 @@ cmake_minimum_required(VERSION 3.17)
 project(HelloCpp)
 
 option(HELLO_COVERAGE "code coverage?" OFF)
+option(HELLO_CODECOV "coverage report to CodeCov?" OFF) # relies on HELLO_COVERAGE
 
 set(CMAKE_CXX_STANDARD 11)
 set(CMAKE_EXPORT_COMPILE_COMMANDS ON)
@@ -79,19 +80,33 @@ if(HELLO_COVERAGE)
   # first run `make test` or `ctest`, ensure .gcdata generated
   # then run `make test_coverage` to get statistics
   # if `make test_coverage` failed, most likely no `make test` executed yet.
-  add_custom_target(coverage
-    COMMAND ctest --output-on-failure
-    COMMAND lcov -d ./ -c -o lcov.info --gcov-tool ${GCOV_TOOL}
-    COMMAND lcov -r lcov.info '/usr/*' -o lcov.info --gcov-tool ${GCOV_TOOL}
-    COMMAND lcov -r lcov.info '*/build/*' -o lcov.info --gcov-tool ${GCOV_TOOL}
-    COMMAND lcov -r lcov.info '*/test/test_*' -o lcov.info --gcov-tool ${GCOV_TOOL}
-    COMMAND lcov --list lcov.info --gcov-tool ${GCOV_TOOL}
-    COMMAND genhtml -o coverage_report lcov.info
-    COMMAND ${CMAKE_COMMAND} -E cmake_echo_color --cyan "View test coverage html report:"
-    COMMAND ${CMAKE_COMMAND} -E cmake_echo_color --cyan "    cd coverage_report"
-    COMMAND ${CMAKE_COMMAND} -E cmake_echo_color --cyan "    python -m http.server 7082"
-    WORKING_DIRECTORY ${CMAKE_BINARY_DIR}
-  )
+
+  if(HELLO_CODECOV)
+    #with lcov front end tool
+    add_custom_target(coverage
+      COMMAND ctest --output-on-failure
+      COMMAND lcov -d ./ -c -o lcov.info --gcov-tool ${GCOV_TOOL}
+      COMMAND lcov -r lcov.info '/usr/*' -o lcov.info --gcov-tool ${GCOV_TOOL}
+      COMMAND lcov -r lcov.info '*/build/*' -o lcov.info --gcov-tool ${GCOV_TOOL}
+      COMMAND lcov -r lcov.info '*/test/test_*' -o lcov.info --gcov-tool ${GCOV_TOOL}
+      COMMAND lcov --list lcov.info --gcov-tool ${GCOV_TOOL}
+      COMMAND genhtml -o coverage_report lcov.info
+      COMMAND ${CMAKE_COMMAND} -E cmake_echo_color --cyan "View test coverage html report:"
+      COMMAND ${CMAKE_COMMAND} -E cmake_echo_color --cyan "    cd coverage_report"
+      COMMAND ${CMAKE_COMMAND} -E cmake_echo_color --cyan "    python -m http.server 7082"
+      WORKING_DIRECTORY ${CMAKE_BINARY_DIR}
+    )
+  else()
+    # with gcovr front end tool
+    # `pip install gcovr`
+    add_custom_target(coverage
+      COMMAND ctest --output-on-failure
+      COMMAND gcovr -r ${CMAKE_SOURCE_DIR} ${CMAKE_BINARY_DIR} -f ${CMAKE_SOURCE_DIR}/src --html --html-details -o gcovr_test_coverage.html
+      COMMAND ${CMAKE_COMMAND} -E cmake_echo_color --cyan "View test coverage html report:"
+      COMMAND ${CMAKE_COMMAND} -E cmake_echo_color --cyan "    open gcovr_test_coverage.html"
+      WORKING_DIRECTORY ${CMAKE_BINARY_DIR}
+    )
+  endif()
 endif()
 
 #----------------------------------------------------------------------

@@ -22,3 +22,6 @@
 HELLO_DLL std::string hello(const char* name);
 
 HELLO_DLL std::vector<std::string> split_string(const std::string& s);
+
+void cvtColor();
+void what();

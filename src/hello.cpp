@@ -44,3 +44,9 @@ std::vector<std::string> split_string(const std::string& s)
 
     return ret;
 }
+
+
+void what()
+{
+    printf("what??\n");
+}

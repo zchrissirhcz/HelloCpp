@@ -33,8 +33,9 @@ This is an example C++ project with features:
     - [x] Use GoogleTest for C++ unittest
     - [x] Integrate GoogleTest with CMake
     - [x] GCC compiler test coverage report
-    - [x] CodeCov integration
     - [x] Clang compiler test coverage report
+    - [x] CodeCov integration
+    - [x] gcovr integration
 
 - [x] Installing
     - [x] Create static library and executable targets
