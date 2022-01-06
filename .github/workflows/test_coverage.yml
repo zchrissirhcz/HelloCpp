@@ -41,7 +41,7 @@ jobs:
       run: |
         mkdir build
         cd build
-        cmake .. -DCMAKE_BUILD_TYPE=${{env.BUILD_TYPE}} -DGTest_DIR=${{github.workspace}}/googletest-install/lib/cmake/GTest -DHELLO_COVERAGE=ON
+        cmake .. -DCMAKE_BUILD_TYPE=${{env.BUILD_TYPE}} -DGTest_DIR=${{github.workspace}}/googletest-install/lib/cmake/GTest -DHELLO_COVERAGE=ON -DHELLO_CODECOV=ON
 
     - name: Build
       run: cmake --build build --config ${{env.BUILD_TYPE}}
