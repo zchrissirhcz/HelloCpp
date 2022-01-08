@@ -13,15 +13,15 @@
 #    define HELLO_EXPORTS
 #endif
 #if defined HELLO_API_EXPORTS
-#   define HELLO_DLL HELLO_EXPORTS
+#   define HELLO_API HELLO_EXPORTS
 #else
-#   define HELLO_DLL
+#   define HELLO_API
 #endif
 
 
-HELLO_DLL std::string hello(const char* name);
+HELLO_API std::string hello(const char* name);
 
-HELLO_DLL std::vector<std::string> split_string(const std::string& s);
+HELLO_API std::vector<std::string> split_string(const std::string& s);
 
 void cvtColor();
 void what();
