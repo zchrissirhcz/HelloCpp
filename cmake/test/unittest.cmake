@@ -1,15 +1,3 @@
-if(HELLO_COVERAGE)
-  message(STATUS ">>> test coverage: YES")
-  target_compile_options(hello PUBLIC -coverage -fprofile-arcs -ftest-coverage)
-  target_link_libraries(hello PUBLIC -coverage -lgcov)
-endif()
-
-if(CMAKE_CXX_COMPILER_ID MATCHES "GNU")
-  set(GCOV_TOOL gcov)
-elseif(CMAKE_CXX_COMPILER_ID MATCHES "Clang")
-  set(GCOV_TOOL ${CMAKE_SOURCE_DIR}/scripts/gcov_for_clang.sh)
-endif()
-
 enable_testing()
 
 #---------------------------------------------------------------
@@ -60,9 +48,10 @@ if(HELLO_COVERAGE)
   else()
     # with gcovr front end tool
     # `pip install gcovr`
+    message(STATUS "... GCOV_TOOL is ${GCOV_TOOL}")
     add_custom_target(coverage
       COMMAND ctest --output-on-failure
-      COMMAND gcovr -r ${CMAKE_SOURCE_DIR} ${CMAKE_BINARY_DIR} -f ${CMAKE_SOURCE_DIR}/src --html --html-details -o gcovr_test_coverage.html
+      COMMAND gcovr -r ${CMAKE_SOURCE_DIR} ${CMAKE_BINARY_DIR} -f ${CMAKE_SOURCE_DIR}/src --html --html-details -o gcovr_test_coverage.html --gcov-executable ${GCOV_TOOL}
       COMMAND ${CMAKE_COMMAND} -E cmake_echo_color --cyan "View test coverage html report:"
       COMMAND ${CMAKE_COMMAND} -E cmake_echo_color --cyan "    open gcovr_test_coverage.html"
       WORKING_DIRECTORY ${CMAKE_BINARY_DIR}
