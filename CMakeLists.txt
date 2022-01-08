@@ -36,6 +36,11 @@ target_include_directories(hello PUBLIC
   $<BUILD_INTERFACE:${CMAKE_SOURCE_DIR}/api>
   $<INSTALL_INTERFACE:include>
 )
+if(HELLO_COVERAGE)
+  include(cmake/coverage/coverage.cmake)
+  target_compile_options(hello PUBLIC ${coverage_compile_options})
+  target_link_libraries(hello PUBLIC ${coverage_link_libraries})
+endif()
 
 #----------------------------------------------------------------------
 # Testing

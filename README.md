@@ -39,11 +39,11 @@ This is an example C++ project with features:
 
 - [x] Installing
     - [x] Create static library and executable targets
-    - [ ] Create shared library for Linux, Android and Windows platforms
     - [x] Providing `helloConfig.cmake` for further `find_package(hello)`
     - [x] Installed `helloConfig.cmake` with portable prefix instead of hard-coded
-    - [x] Example project demonstrate how `find_package(hello)` use
     - [x] `helloConfig.cmake` handle release/debug modes separately by postfix `_d`
+    - [x] Example project demonstrate how `find_package(hello)` use
+    - [ ] Create shared library for Linux, Android and Windows platforms
 
 - [x] CI / CD
     - [x] Github Action
@@ -58,7 +58,7 @@ This is an example C++ project with features:
 If your target feature is not listed above, you may create a issue for that.
 
 ## Local usage
-```
+```bash
 git clone https://github.com/zchrissirhcz/HelloCpp
 cd HelloCpp
 
