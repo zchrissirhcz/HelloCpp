@@ -43,7 +43,7 @@ This is an example C++ project with features:
     - [x] Providing `helloConfig.cmake` for further `find_package(hello)`
     - [x] Installed `helloConfig.cmake` with portable prefix instead of hard-coded
     - [x] Example project demonstrate how `find_package(hello)` use
-    - [ ] `helloConfig.cmake` handle release/debug modes separately
+    - [x] `helloConfig.cmake` handle release/debug modes separately by postfix `_d`
 
 - [x] CI / CD
     - [x] Github Action
