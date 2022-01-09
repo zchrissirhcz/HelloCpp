@@ -34,8 +34,9 @@ This is an example C++ project with features:
     - [x] Integrate GoogleTest with CMake
     - [x] GCC compiler test coverage report
     - [x] Clang compiler test coverage report
-    - [x] CodeCov integration
+    - [x] CodeCov integration for CI coverage display
     - [x] gcovr integration
+    - [x] Visual Studio Community: use [OpenCppCoverage plugin](https://marketplace.visualstudio.com/items?itemName=OpenCppCoverage.OpenCppCoveragePlugin)
 
 - [x] Installing
     - [x] Create static library and executable targets
@@ -58,6 +59,8 @@ This is an example C++ project with features:
 If your target feature is not listed above, you may create a issue for that.
 
 ## Local usage
+
+### Linux/macOSX
 ```bash
 git clone https://github.com/zchrissirhcz/HelloCpp
 cd HelloCpp
@@ -75,3 +78,8 @@ python -m http.server 7082
 ![](snapshots/coverage1.png)
 
 ![](snapshots/coverage2.png)
+
+### Visual Studio
+Use cmake generate `.sln` file, run test, then switch to OpenCppCoverage plugin's output page:
+
+![](snapshots/OpenCppCoverage.png)
