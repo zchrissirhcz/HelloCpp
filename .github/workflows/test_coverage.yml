@@ -67,7 +67,7 @@ jobs:
           lcov --list lcov.info
         fi
     - name: codecov
-      uses: codecov/codecov-action@v2.1.0
+      uses: codecov/codecov-action@v3
       with:
         token: ${{ secrets.CODECOV_TOKEN }}
         file: build/lcov.info
