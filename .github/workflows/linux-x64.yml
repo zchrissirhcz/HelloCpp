@@ -58,7 +58,7 @@ jobs:
       run: cmake --install . --config ${{env.BUILD_TYPE}}
 
     - name: Upload
-      uses: actions/upload-artifact@v2
+      uses: actions/upload-artifact@v3
       with:
         name: HelloCpp-${{runner.os}}-x64
         path: ${{github.workspace}}/build/install
